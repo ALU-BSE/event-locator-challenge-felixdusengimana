@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - Event Locator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-calendar-event me-2"></i>Event Locator
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="bg-light">
+        <div class="container">
+            <ol class="breadcrumb py-3 mb-0">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="events.html">Events</a></li>
+                <li class="breadcrumb-item active" aria-current="page" id="breadcrumbEventName">Event Details</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Event Details Section -->
+    <section class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Event Header -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <span class="badge bg-primary mb-2" id="eventCategory">Category</span>
+                                    <h1 class="h2 mb-2" id="eventTitle">Event Title</h1>
+                                    <div class="text-muted">
+                                        <i class="bi bi-calendar3 me-2"></i><span id="eventDate">Date</span>
+                                        <span class="mx-2">•</span>
+                                        <i class="bi bi-clock me-2"></i><span id="eventTime">Time</span>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="h4 text-primary mb-0" id="eventPrice">Price</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <span id="eventLocation">Location</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <i class="bi bi-person me-2"></i>
+                                <span>Organized by <strong id="eventOrganizer">Organizer</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Image -->
+                    <div class="card mb-4">
+                        <img id="eventImage" src="" alt="Event Image" class="card-img-top" style="height: 300px; object-fit: cover;">
+                    </div>
+
+                    <!-- Event Description -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="h5 mb-0 form-section-title">📝 About This Event</h3>
+                        </div>
+                        <div class="card-body">
+                            <p id="eventDescription">Event description will be loaded here...</p>
+                        </div>
+                    </div>
+
+                    <!-- Event Highlights -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="h5 mb-0 form-section-title">⭐ Event Highlights</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul id="eventHighlights" class="list-unstyled">
+                                <!-- Highlights will be populated by JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Booking Card -->
+                    <div class="card mb-4 sticky-top">
+                        <div class="card-header">
+                            <h3 class="h5 mb-0 form-section-title">🎫 Book Your Spot</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>Price:</span>
+                                <span class="h5 text-primary mb-0" id="sidebarPrice">$0</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span>Available Spots:</span>
+                                <span class="badge bg-success" id="availableSpots">Available</span>
+                            </div>
+                            <button class="btn btn-primary w-100 mb-3" id="bookNowBtn">
+                                <i class="bi bi-ticket-perforated me-2"></i>Book Now
+                            </button>
+                            <div class="text-center">
+                                <button class="btn btn-outline-secondary btn-sm me-2" onclick="shareEvent()">
+                                    <i class="bi bi-share"></i> Share
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="addToCalendar()">
+                                    <i class="bi bi-calendar-plus"></i> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Venue Information -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="h5 form-section-title mb-0">Venue Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <strong id="venueName">Venue Name</strong>
+                            </div>
+                            <div class="mb-3 text-muted" id="venueAddress">
+                                Venue Address
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="getDirections()">
+                                <i class="bi bi-map me-2"></i>Get Directions
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="h5 form-section-title mb-0">Contact Organizer</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <i class="bi bi-envelope me-2"></i>
+                                <span id="organizerEmail">contact@example.com</span>
+                            </div>
+                            <div class="mb-3">
+                                <i class="bi bi-telephone me-2"></i>
+                                <span id="organizerPhone">+1 (555) 123-4567</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100">
+                                <i class="bi bi-chat-dots me-2"></i>Send Message
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Events Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">🎯 You Might Also Like</h2>
+            <div class="row" id="relatedEvents">
+                <!-- Related events will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Event Locator</h5>
+                    <p class="mb-0">Your go-to platform for discovering amazing events in your city.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">&copy; 2025 Event Locator. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/events-data.js"></script>
+    <script src="js/event-details.js"></script>
+</body>
+</html>
